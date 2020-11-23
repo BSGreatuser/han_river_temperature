@@ -5,6 +5,8 @@
 ###################
 
 import discord
+import requests
+from bs4 import BeautifulSoup
 
 client = discord.Client()
 
@@ -17,11 +19,13 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('봉순아 한강온도'): #requ,bs4
-        url = "https://hangang.life"
-        res = requests.get(url)
+        if message.content.startswith('!한강온도'): #requ,bs4
+        hdr = {'User-Agent': 'Mozilla/5.0'}
+        url = 'https://hangang.life'
+        req = Request(url, headers=hdr)
+        html = urllib.request.urlopen(req)
+        soup = bs4.BeautifulSoup(html, "html.parser")
 
-        soup = BeautifulSoup(res.text, "lxml")
 
         temp = soup.find("h1", attrs={"class":"white"}) #한강온도
         date = soup.find("font", attrs={"style":"font-weight: 700; font-size: 10pt;"}) #측정날짜
