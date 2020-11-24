@@ -1,9 +1,8 @@
 
 ###################
-####python 3.x#####
 #discord.py==1.4.0#
 ###################
-import bs4
+
 import discord
 import requests
 from bs4 import BeautifulSoup
@@ -24,7 +23,7 @@ async def on_message(message):
         url = 'https://hangang.life'
         req = Request(url, headers=hdr)
         html = urllib.request.urlopen(req)
-        soup = bs4.BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(html, "html.parser")
 
 
         temp = soup.find("h1", attrs={"class":"white"}) #한강온도
