@@ -3,7 +3,7 @@
 ####python 3.x#####
 #discord.py==1.4.0#
 ###################
-
+import bs4
 import discord
 import requests
 from bs4 import BeautifulSoup
