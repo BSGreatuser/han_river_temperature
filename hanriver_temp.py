@@ -18,7 +18,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-        if message.content.startswith('!한강온도'): #requ,bs4
+    if message.content.startswith('!한강온도'): #requ,bs4
         hdr = {'User-Agent': 'Mozilla/5.0'}
         url = 'https://hangang.life'
         req = Request(url, headers=hdr)
