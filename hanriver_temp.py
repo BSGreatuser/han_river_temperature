@@ -1,11 +1,4 @@
-
-###################
-#discord.py==1.4.0#
-###################
-
 import discord
-import requests
-from bs4 import BeautifulSoup
 
 client = discord.Client()
 
@@ -18,20 +11,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('!한강온도'): #requ,bs4
-        hdr = {'User-Agent': 'Mozilla/5.0'}
-        url = 'https://hangang.life'
-        req = Request(url, headers=hdr)
-        html = urllib.request.urlopen(req)
-        soup = BeautifulSoup(html, "html.parser")
+    if message.content.startswith('봉순아 한강온도'):
+        json = requests.get('http://hangang.dkserver.wo.tc/').json()
+        temp = json.get("temp") # 한강온도
+        time = json.get("time") # 측정시간
 
+        embed = discord.Embed(title='💧 한강온도', description=f'{temp}°C', colour=discord.Colour.blue())
+        embed.set_footer(text=f'{time}에 측정됨')
 
-        temp = soup.find("h1", attrs={"class":"white"}) #한강온도
-        date = soup.find("font", attrs={"style":"font-weight: 700; font-size: 10pt;"}) #측정날짜
-
-        hanembed = discord.Embed(title="💧 한강온도", description=f"{temp.get_text()}", colour=discord.Colour.blue())
-        hanembed.set_footer(text=date.get_text())
-        await message.channel.send(embed=hanembed)
-
+        await message.channel.send(embed=embed)
 
 client.run('★TOKEN★')
