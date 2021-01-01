@@ -1,4 +1,5 @@
 import discord
+import requests
 
 client = discord.Client()
 
